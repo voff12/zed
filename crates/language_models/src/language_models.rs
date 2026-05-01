@@ -28,6 +28,7 @@ use crate::provider::open_ai::OpenAiLanguageModelProvider;
 use crate::provider::open_ai_compatible::OpenAiCompatibleLanguageModelProvider;
 use crate::provider::open_router::OpenRouterLanguageModelProvider;
 use crate::provider::opencode::OpenCodeLanguageModelProvider;
+use crate::provider::qwen::QwenLanguageModelProvider;
 use crate::provider::vercel_ai_gateway::VercelAiGatewayLanguageModelProvider;
 use crate::provider::x_ai::XAiLanguageModelProvider;
 pub use crate::settings::*;
@@ -267,6 +268,14 @@ fn register_language_model_providers(
     );
     registry.register_provider(
         Arc::new(DeepSeekLanguageModelProvider::new(
+            client.http_client(),
+            credentials_provider.clone(),
+            cx,
+        )),
+        cx,
+    );
+    registry.register_provider(
+        Arc::new(QwenLanguageModelProvider::new(
             client.http_client(),
             credentials_provider.clone(),
             cx,

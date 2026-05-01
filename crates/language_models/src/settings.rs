@@ -8,7 +8,8 @@ use crate::provider::{
     deepseek::DeepSeekSettings, google::GoogleSettings, lmstudio::LmStudioSettings,
     mistral::MistralSettings, ollama::OllamaSettings, open_ai::OpenAiSettings,
     open_ai_compatible::OpenAiCompatibleSettings, open_router::OpenRouterSettings,
-    opencode::OpenCodeSettings, vercel_ai_gateway::VercelAiGatewaySettings, x_ai::XAiSettings,
+    opencode::OpenCodeSettings, qwen::QwenSettings, vercel_ai_gateway::VercelAiGatewaySettings,
+    x_ai::XAiSettings,
 };
 
 #[derive(Debug, RegisterSetting)]
@@ -24,6 +25,7 @@ pub struct AllLanguageModelSettings {
     pub open_router: OpenRouterSettings,
     pub openai: OpenAiSettings,
     pub openai_compatible: HashMap<Arc<str>, OpenAiCompatibleSettings>,
+    pub qwen: QwenSettings,
     pub vercel_ai_gateway: VercelAiGatewaySettings,
     pub x_ai: XAiSettings,
     pub zed_dot_dev: ZedDotDevSettings,
@@ -45,6 +47,7 @@ impl settings::Settings for AllLanguageModelSettings {
         let open_router = language_models.open_router.unwrap();
         let openai = language_models.openai.unwrap();
         let openai_compatible = language_models.openai_compatible.unwrap();
+        let qwen = language_models.qwen.unwrap();
         let vercel_ai_gateway = language_models.vercel_ai_gateway.unwrap();
         let x_ai = language_models.x_ai.unwrap();
         let zed_dot_dev = language_models.zed_dot_dev.unwrap();
@@ -112,6 +115,10 @@ impl settings::Settings for AllLanguageModelSettings {
                     )
                 })
                 .collect(),
+            qwen: QwenSettings {
+                api_url: qwen.api_url.unwrap(),
+                available_models: qwen.available_models.unwrap_or_default(),
+            },
             vercel_ai_gateway: VercelAiGatewaySettings {
                 api_url: vercel_ai_gateway.api_url.unwrap(),
                 available_models: vercel_ai_gateway.available_models.unwrap_or_default(),

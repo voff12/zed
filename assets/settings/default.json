@@ -2367,6 +2367,9 @@
     "x_ai": {
       "api_url": "https://api.x.ai/v1",
     },
+    "qwen": {
+      "api_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    },
     "zed.dev": {},
   },
   "session": {

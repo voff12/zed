@@ -146,6 +146,7 @@ members = [
     "crates/open_router",
     "crates/outline",
     "crates/outline_panel",
+    "crates/qwen",
     "crates/panel",
     "crates/paths",
     "crates/picker",
@@ -403,6 +404,7 @@ open_path_prompt = { path = "crates/open_path_prompt" }
 open_router = { path = "crates/open_router", features = ["schemars"] }
 outline = { path = "crates/outline" }
 outline_panel = { path = "crates/outline_panel" }
+qwen = { path = "crates/qwen" }
 panel = { path = "crates/panel" }
 paths = { path = "crates/paths" }
 perf = { path = "tooling/perf" }

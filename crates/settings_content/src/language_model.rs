@@ -21,6 +21,7 @@ pub struct AllLanguageModelSettingsContent {
     pub open_router: Option<OpenRouterSettingsContent>,
     pub openai: Option<OpenAiSettingsContent>,
     pub openai_compatible: Option<HashMap<Arc<str>, OpenAiCompatibleSettingsContent>>,
+    pub qwen: Option<QwenSettingsContent>,
     pub vercel_ai_gateway: Option<VercelAiGatewaySettingsContent>,
     pub x_ai: Option<XAiSettingsContent>,
     #[serde(rename = "zed.dev")]
@@ -211,6 +212,22 @@ pub struct DeepseekSettingsContent {
 #[with_fallible_options]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, JsonSchema, MergeFrom)]
 pub struct DeepseekAvailableModel {
+    pub name: String,
+    pub display_name: Option<String>,
+    pub max_tokens: u64,
+    pub max_output_tokens: Option<u64>,
+}
+
+#[with_fallible_options]
+#[derive(Default, Clone, Debug, Serialize, Deserialize, PartialEq, JsonSchema, MergeFrom)]
+pub struct QwenSettingsContent {
+    pub api_url: Option<String>,
+    pub available_models: Option<Vec<QwenAvailableModel>>,
+}
+
+#[with_fallible_options]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize, JsonSchema, MergeFrom)]
+pub struct QwenAvailableModel {
     pub name: String,
     pub display_name: Option<String>,
     pub max_tokens: u64,
