@@ -565,9 +565,8 @@ impl ConfigurationView {
         let load_credentials_task = Some(cx.spawn({
             let state = state.clone();
             async move |this, cx| {
-                if let Some(task) = Some(state.update(cx, |state, cx| state.authenticate(cx))) {
-                    let _ = task.await;
-                }
+                let task = state.update(cx, |state, cx| state.authenticate(cx));
+                let _ = task.await;
 
                 this.update(cx, |this, cx| {
                     this.load_credentials_task = None;
